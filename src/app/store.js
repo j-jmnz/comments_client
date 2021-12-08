@@ -1,8 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
+import { setupListeners } from '@reduxjs/toolkit/query';
+
+import { commentsApi } from './api';
 
 export const store = configureStore({
-  reducer: {
-    counter: counterReducer,
-  },
+    reducer: {
+        [commentsApi.reducerPath]: commentsApi.reducer,
+    },
 });
+
+setupListeners(store.dispatch);
